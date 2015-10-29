@@ -91,6 +91,14 @@ object FunctionDemo {
   }                                               //> factorial: (a: Int)Int
   factorial(5)                                    //> res11: Int = 120
 
+  def sumTailRecur(a:Int, b:Int) :Int = {
+  	def sumt(acc: Int, x: Int, y: Int): Int = if (x > y) acc else sumt(acc + x, x + 1, y)
+  	sumt(0,a,b);
+  	 
+  }                                               //> sumTailRecur: (a: Int, b: Int)Int
+  
+  sumTailRecur(1,6);                              //> res12: Int = 21
+  
   //Higher order function, a function that takes function as parameter or returns function
   def highOrderSum(f: Int => Int, x: Int, y: Int): Int = {
     def sumt(acc: Int, x: Int, y: Int): Int = if (x > y) acc else sumt(acc + f(x), x + 1, y)
@@ -98,35 +106,35 @@ object FunctionDemo {
   }                                               //> highOrderSum: (f: Int => Int, x: Int, y: Int)Int
 
   //Anonymous functions or functions as literals
-  val cube = (x: Int) => x * x * x                //> cube  : Int => Int = <function1>
-  cube(3)                                         //> res12: Int = 27
+  val cube = (x: Int) => { x * x * x}             //> cube  : Int => Int = <function1>
+  cube(3)                                         //> res13: Int = 27
 
-  highOrderSum((x: Int) => x, 1, 5)               //> res13: Int = 15
-  highOrderSum((x: Int) => x, 5, 1)               //> res14: Int = 0
-  highOrderSum(cube, 1, 3)                        //> res15: Int = 36
+  highOrderSum((x: Int) => x, 1, 5)               //> res14: Int = 15
+  highOrderSum((x: Int) => x, 5, 1)               //> res15: Int = 0
+  highOrderSum(cube, 1, 3)                        //> res16: Int = 36
 
   //sum of even numbers between a range
-  highOrderSum(((x: Int) => if (x % 2 == 0) x else 0), 1, 6)
-                                                  //> res16: Int = 12
+  highOrderSum(((x: Int) => if (x % 2 == 0) x else 0), 1, 10)
+                                                  //> res17: Int = 30
 
   //partially applied functions
 
   val sumOfCubes = highOrderSum(cube, _: Int, _: Int)
                                                   //> sumOfCubes  : (Int, Int) => Int = <function2>
-  sumOfCubes(1, 3)                                //> res17: Int = 36
+  sumOfCubes(1, 3)                                //> res18: Int = 36
 
   //function Currying
   def curriedSum(f: Int => Int)(x: Int, y: Int): Int = {
     def sumt(acc: Int, x: Int, y: Int): Int = if (x > y) acc else sumt(acc + f(x), x + 1, y)
     sumt(0, x, y)
   }                                               //> curriedSum: (f: Int => Int)(x: Int, y: Int)Int
-  curriedSum(cube)(1, 3)                          //> res18: Int = 36
+  curriedSum(cube)(1, 3)                          //> res19: Int = 36
 
   //procedure = function without return type, this is equivalent to   def printLog(msg:String):Unit=
   def printLog(msg: String) {
     println(decorate(new Date().toString(), "[", "]>>>>") + msg);
   }                                               //> printLog: (msg: String)Unit
-  printLog("Hello Scala")                         //> [Tue Oct 27 18:45:50 GMT+05:30 2015]>>>>Hello Scala
+  printLog("Hello Scala")                         //> [Wed Oct 28 19:06:12 GMT+05:30 2015]>>>>Hello Scala
 
   //lazy valuation, its initialization is deferred until it is accessed for first time
 
@@ -143,10 +151,10 @@ object FunctionDemo {
     if (x == 6) cube(get6()) else cube(x - 1)
   }                                               //> explore6: (x: Int)Int
 
-  lazyExplore6(5)                                 //> res19: Int = 64
+  lazyExplore6(5)                                 //> res20: Int = 64
   lazyExplore6(6)                                 //> I am lazy...
-                                                  //| res20: Int = 216
-  explore6(5)                                     //> res21: Int = 64
+                                                  //| res21: Int = 216
+  explore6(5)                                     //> res22: Int = 64
   explore6(6)                                     //> I am not lazy...
-                                                  //| res22: Int = 216
+                                                  //| res23: Int = 216
 }
