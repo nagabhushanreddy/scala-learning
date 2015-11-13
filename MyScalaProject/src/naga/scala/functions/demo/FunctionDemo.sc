@@ -134,7 +134,7 @@ object FunctionDemo {
   def printLog(msg: String) {
     println(decorate(new Date().toString(), "[", "]>>>>") + msg);
   }                                               //> printLog: (msg: String)Unit
-  printLog("Hello Scala")                         //> [Wed Oct 28 19:06:12 GMT+05:30 2015]>>>>Hello Scala
+  printLog("Hello Scala")                         //> [Wed Nov 11 12:38:24 GMT+05:30 2015]>>>>Hello Scala
 
   //lazy valuation, its initialization is deferred until it is accessed for first time
 
@@ -157,4 +157,6 @@ object FunctionDemo {
   explore6(5)                                     //> res22: Int = 64
   explore6(6)                                     //> I am not lazy...
                                                   //| res23: Int = 216
+                                                  
+
 }
